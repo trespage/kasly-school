@@ -79,6 +79,10 @@ Route::middleware(['auth', 'siswa'])->group(function () {
     Route::get('/riwayat', [RiwayatController::class, 'index'])
         ->name('riwayat.index');
 
+    // ✅ RIWAYAT PENGELUARAN (BARU!)
+    Route::get('/riwayat-pengeluaran', [RiwayatController::class, 'pengeluaran'])
+        ->name('riwayat.pengeluaran');
+
     // Pengumuman (View Siswa) - PATH DIUBAH AGAR TIDAK BENTROK
     Route::get('/pengumuman-siswa', [SiswaPengumumanController::class, 'index'])
         ->name('siswa.pengumuman');

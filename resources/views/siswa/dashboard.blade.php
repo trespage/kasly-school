@@ -180,7 +180,7 @@
             </div>
         @endif
 
-        <!-- ✅ DAFTAR SISWA YANG BELUM BAYAR -->
+        <!-- DAFTAR SISWA YANG BELUM BAYAR -->
         @if($siswaBelumBayar->count() > 0)
             <div class="border-t border-slate-200 dark:border-slate-700 pt-5">
                 <p class="text-xs font-semibold text-slate-500 dark:text-slate-400 mb-3 uppercase tracking-wider flex items-center gap-2">
@@ -209,20 +209,20 @@
     </div>
 
     <!-- ============================================ -->
-    <!-- RIWAYAT & PENGUMUMAN (2 Kolom) -->
+    <!-- RIWAYAT & PENGUMUMAN (3 Kolom) -->
     <!-- ============================================ -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
-        <!-- Riwayat Pembayaran -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+        <!-- Riwayat Pemasukan -->
         <div class="glass-card rounded-xl border border-white/20 dark:border-white/10 overflow-hidden">
             <div class="p-5 border-b border-slate-200/50 dark:border-slate-700/50 flex items-center justify-between">
                 <div>
                     <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                        <svg class="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                        <svg class="w-5 h-5 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12"></path>
                         </svg>
-                        Riwayat Pembayaran
+                        Riwayat Pemasukan
                     </h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">5 transaksi terakhir kamu</p>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Pembayaran kamu</p>
                 </div>
                 <a href="{{ route('riwayat.index') }}" class="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">
                     Lihat Semua →
@@ -253,6 +253,53 @@
                             </svg>
                         </div>
                         <p class="text-sm text-slate-500 dark:text-slate-400">Belum ada riwayat pembayaran.</p>
+                    </div>
+                @endforelse
+            </div>
+        </div>
+
+        <!-- Riwayat Pengeluaran -->
+        <div class="glass-card rounded-xl border border-white/20 dark:border-white/10 overflow-hidden">
+            <div class="p-5 border-b border-slate-200/50 dark:border-slate-700/50 flex items-center justify-between">
+                <div>
+                    <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                        <svg class="w-5 h-5 text-rose-600 dark:text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 13l-5 5m0 0l-5-5m5 5V6"></path>
+                        </svg>
+                        Riwayat Pengeluaran
+                    </h3>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Transparansi kas kelas</p>
+                </div>
+                <a href="{{ route('riwayat.pengeluaran') }}" class="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">
+                    Lihat Semua →
+                </a>
+            </div>
+
+            <div class="divide-y divide-slate-200 dark:divide-slate-700">
+                @forelse($riwayatPengeluaran as $e)
+                    <div class="p-4 hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-gradient-to-br from-rose-500 to-rose-600 rounded-lg flex items-center justify-center shadow-md">
+                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-sm font-semibold text-slate-900 dark:text-white">{{ $e->category }}</p>
+                                <p class="text-xs text-slate-500 dark:text-slate-400">{{ $e->notes ?? '-' }}</p>
+                                <p class="text-xs text-slate-500 dark:text-slate-400">{{ \Carbon\Carbon::parse($e->expense_date)->format('d M Y') }}</p>
+                            </div>
+                        </div>
+                        <p class="text-sm font-bold text-rose-600 dark:text-rose-400">- Rp {{ number_format($e->amount, 0, ',', '.') }}</p>
+                    </div>
+                @empty
+                    <div class="p-12 text-center">
+                        <div class="w-16 h-16 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <svg class="w-8 h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path>
+                            </svg>
+                        </div>
+                        <p class="text-sm text-slate-500 dark:text-slate-400">Belum ada pengeluaran.</p>
                     </div>
                 @endforelse
             </div>

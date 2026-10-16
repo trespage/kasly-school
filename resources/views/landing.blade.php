@@ -862,7 +862,7 @@
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-white font-bold">A</div>
                     <div>
-                        <div class="font-semibold text-sm">Anggia</div>
+                        <div class="font-semibold text-sm">Anggia Tresa</div>
                         <div class="text-xs text-slate-500 dark:text-slate-400">Bendahara Kelas</div>
                     </div>
                 </div>
@@ -876,7 +876,7 @@
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 bg-gradient-to-br from-cyan-400 to-cyan-600 rounded-full flex items-center justify-center text-white font-bold">B</div>
                     <div>
-                        <div class="font-semibold text-sm">Budi</div>
+                        <div class="font-semibold text-sm">Ahn Keonho</div>
                         <div class="text-xs text-slate-500 dark:text-slate-400">Siswa</div>
                     </div>
                 </div>
@@ -890,7 +890,7 @@
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center text-white font-bold">S</div>
                     <div>
-                        <div class="font-semibold text-sm">Siti</div>
+                        <div class="font-semibold text-sm">Emma Watson</div>
                         <div class="text-xs text-slate-500 dark:text-slate-400">Bendahara Kelas</div>
                     </div>
                 </div>

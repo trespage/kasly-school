@@ -169,6 +169,14 @@
                     Riwayat Pembayaran
                 </a>
 
+                <!-- ✅ RIWAYAT PENGELUARAN (SUDAH DITAMBAHKAN DI SINI) -->
+                <a href="{{ route('riwayat.pengeluaran') }}" class="sidebar-link {{ request()->routeIs('riwayat.pengeluaran') ? 'active' : '' }} flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 13l-5 5m0 0l-5-5m5 5V6"></path>
+                    </svg>
+                    Riwayat Pengeluaran
+                </a>
+
                 <a href="{{ route('siswa.pengumuman') }}" class="sidebar-link {{ request()->routeIs('siswa.pengumuman') ? 'active' : '' }} flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path>
@@ -225,6 +233,10 @@
                 <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3 px-3">Menu Utama</p>
                 <a href="{{ route('dashboard.siswa') }}" class="sidebar-link {{ request()->routeIs('dashboard.siswa') ? 'active' : '' }} flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm">Dashboard</a>
                 <a href="{{ route('riwayat.index') }}" class="sidebar-link {{ request()->routeIs('riwayat.*') ? 'active' : '' }} flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm">Riwayat Pembayaran</a>
+
+                <!-- ✅ RIWAYAT PENGELUARAN MOBILE (SUDAH DITAMBAHKAN DI SINI) -->
+                <a href="{{ route('riwayat.pengeluaran') }}" class="sidebar-link {{ request()->routeIs('riwayat.pengeluaran') ? 'active' : '' }} flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm">Riwayat Pengeluaran</a>
+
                 <a href="{{ route('siswa.pengumuman') }}" class="sidebar-link {{ request()->routeIs('siswa.pengumuman') ? 'active' : '' }} flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm">Pengumuman</a>
                 <div class="pt-4 mt-4 border-t border-slate-200 dark:border-slate-800">
                     <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3 px-3">Akun</p>
@@ -246,7 +258,6 @@
                     </button>
 
                     <div class="flex-1 lg:flex-none">
-                        <!-- ✅ PERUBAHAN DI SINI - SEMUA JUDUL BIRU -->
                         <h2 class="text-xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
                             @yield('page_title', 'Dashboard')
                         </h2>

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-use App\Models\User;
 
 class SiswaDashboardController extends Controller
 {
@@ -47,10 +46,18 @@ class SiswaDashboardController extends Controller
         $target = $jumlahBulan * $biayaPerBulan;
         $tunggakan = max(0, $target - $total);
 
-        // Riwayat 5 transaksi terakhir
+        // Riwayat 5 transaksi pemasukan terakhir
         $riwayat = DB::table('payments')
             ->where('student_id', $id)
             ->orderByDesc('payment_date')
+            ->limit(5)
+            ->get();
+
+        // ============================================
+        // RIWAYAT PENGELUARAN (BARU!)
+        // ============================================
+        $riwayatPengeluaran = DB::table('expenses')
+            ->orderByDesc('expense_date')
             ->limit(5)
             ->get();
 
@@ -68,10 +75,10 @@ class SiswaDashboardController extends Controller
         // Format period untuk bulan ini (YYYY-MM)
         $period = sprintf('%04d-%02d', $tahunSekarang, $bulanSekarang);
 
-        // Ambil semua pembayaran bulan ini (berdasarkan period)
+        // Ambil semua pembayaran bulan ini
         $pembayaranBulanIni = DB::table('payments')
             ->join('users', 'payments.student_id', '=', 'users.id')
-            ->where('payments.period', $period) // PAKAI PERIOD
+            ->where('payments.period', $period)
             ->select(
                 'users.id as student_id',
                 'users.name',
@@ -95,12 +102,13 @@ class SiswaDashboardController extends Controller
         $previewSiswaBayar = $pembayaranBulanIni->unique('student_id')->take(5)->values();
 
         // ============================================
-        //       SISWA YANG BELUM BAYAR BULAN INI
+        // SISWA YANG BELUM BAYAR BULAN INI
         // ============================================
-        $totalSiswa = User::where('role', 'siswa')->count();
+        $totalSiswa = DB::table('users')->where('role', 'siswa')->count();
         $idSudahBayar = $pembayaranBulanIni->pluck('student_id')->unique()->toArray();
 
-        $siswaBelumBayar = User::where('role', 'siswa')
+        $siswaBelumBayar = DB::table('users')
+            ->where('role', 'siswa')
             ->whereNotIn('id', $idSudahBayar)
             ->orderBy('name')
             ->get();
@@ -114,6 +122,7 @@ class SiswaDashboardController extends Controller
             'jumlahBulan',
             'biayaPerBulan',
             'riwayat',
+            'riwayatPengeluaran',
             'pengumuman',
             'namaBulan',
             'totalSiswaBayar',
